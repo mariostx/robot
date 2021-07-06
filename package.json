@@ -1,0 +1,22 @@
+{
+  "name": "robots",
+  "version": "1.0.0",
+  "description": "",
+  "main": "robots.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -w -p tsconfig.json",
+    "format": "prettier --config .prettierrc src/**/*.ts --write"
+  },
+  "keywords": [],
+  "author": "Mario Strmecki",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
+  }
+}

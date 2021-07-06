@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+
+    "baseUrl": "./src",
+    "target": "ES2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "removeComments": true,
+    
+    "strict": true,
+    "noImplicitAny": true,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

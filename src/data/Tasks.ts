@@ -1,0 +1,34 @@
+import { ITask } from 'interfaces/Task';
+
+export const tasks: Array<ITask> = [];
+
+tasks.push({ id: 1, robotName: 'Dave', name: 'clean_the_windows' });
+tasks.push({ id: 2, robotName: 'Dave', name: 'water_the_plants' });
+tasks.push({ id: 3, robotName: 'Dave', name: 'clean_the_windows' });
+tasks.push({ id: 4, robotName: 'Dave', name: 'feed_the_cat' });
+tasks.push({ id: 5, robotName: 'Dave', name: 'clean_the_windows' });
+tasks.push({ id: 6, robotName: 'Cris', name: 'water_the_plants' });
+tasks.push({ id: 7, robotName: 'Cris', name: 'clean_the_windows' });
+tasks.push({ id: 8, robotName: 'Cris', name: 'clean_the_windows' });
+tasks.push({ id: 9, robotName: 'Cris', name: 'feed_the_cat' });
+tasks.push({ id: 10, robotName: 'Cris', name: 'water_the_plants' });
+tasks.push({ id: 11, robotName: 'Andi', name: 'clean_the_windows' });
+tasks.push({ id: 12, robotName: 'Andi', name: 'water_the_plants' });
+tasks.push({ id: 13, robotName: 'Andi', name: 'clean_the_windows' });
+tasks.push({ id: 14, robotName: 'Andi', name: 'feed_the_cat' });
+tasks.push({ id: 15, robotName: 'Andi', name: 'clean_the_windows' });
+tasks.push({ id: 16, robotName: 'Nick', name: 'water_the_plants' });
+tasks.push({ id: 17, robotName: 'Nick', name: 'clean_the_windows' });
+tasks.push({ id: 18, robotName: 'Nick', name: 'clean_the_windows' });
+tasks.push({ id: 19, robotName: 'Nick', name: 'feed_the_cat' });
+tasks.push({ id: 20, robotName: 'Nick', name: 'water_the_plants' });
+tasks.push({ id: 21, robotName: 'Phil', name: 'clean_the_windows' });
+tasks.push({ id: 22, robotName: 'Phil', name: 'water_the_plants' });
+tasks.push({ id: 23, robotName: 'Phil', name: 'clean_the_windows' });
+tasks.push({ id: 24, robotName: 'Phil', name: 'feed_the_cat' });
+tasks.push({ id: 25, robotName: 'Phil', name: 'clean_the_windows' });
+tasks.push({ id: 26, robotName: 'Maxi', name: 'water_the_plants' });
+tasks.push({ id: 27, robotName: 'Maxi', name: 'clean_the_windows' });
+tasks.push({ id: 28, robotName: 'Maxi', name: 'clean_the_windows' });
+tasks.push({ id: 29, robotName: 'Maxi', name: 'feed_the_cat' });
+tasks.push({ id: 30, robotName: 'Maxi', name: 'water_the_plants' });
