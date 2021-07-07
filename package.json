@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
-    "format": "prettier --config .prettierrc src/**/*.ts --write"
+    "format": "prettier --config .prettierrc src/**/*.ts --write",
+    "dev": "nodemon src/main/RobotApp.ts"
   },
   "keywords": [],
   "author": "Mario Strmecki",
@@ -16,7 +17,9 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.9",
     "prettier": "^2.3.2",
+    "ts-node": "^10.0.0",
     "typescript": "^4.3.5"
   }
 }
