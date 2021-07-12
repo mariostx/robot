@@ -1,0 +1,11 @@
+{
+  "clean_the_windows": {
+    "rateLimit": 5.0
+  },
+  "water_the_plants": {
+    "rateLimit": 3.0
+  },
+  "feed_the_cat": {
+    "rateLimit": 2.0
+  }
+}
