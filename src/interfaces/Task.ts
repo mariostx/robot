@@ -9,10 +9,6 @@ export type ITaskPriority = {
   [taskName in TaskName]: number;
 };
 
-export type ITaskExecutionTime = {
-  [taskName in TaskName]: number;
-};
-
 export interface ITask {
   id: number;
   name: TaskName;
@@ -22,5 +18,4 @@ export interface ITask {
 export interface ITaskManager {
   getTask(ongoingTasks: ITask[], blockedTasks: string[]): ITask | null;
   size(): number;
-  evaluate(executionTime: ITaskExecutionTime): void;
 }

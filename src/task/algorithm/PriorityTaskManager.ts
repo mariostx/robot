@@ -1,4 +1,5 @@
-import { TaskName, ITaskPriority, ITaskManager, ITaskExecutionTime } from './../../interfaces/Task';
+import { tasks } from './../../data/Tasks';
+import { TaskName, ITaskPriority, ITaskManager, TaskNameEnum } from './../../interfaces/Task';
 import { ITask } from '../../interfaces/Task';
 import { ITaskConfig } from '../../interfaces/TaskConfig';
 
@@ -18,26 +19,21 @@ export class PriorityTaskManager implements ITaskManager {
         this.tasks.set(robotName, [task]);
       }
     });
-    this.taskPriority = {
-      clean_the_windows: taskConfig.clean_the_windows.rateLimit*1000,
-      water_the_plants: taskConfig.water_the_plants.rateLimit*1000,
-      feed_the_cat: taskConfig.feed_the_cat.rateLimit*1000,
-    };
+    this.taskPriority = this.calculateTasksPriority();
   }
 
-  evaluate(executionTimes: ITaskExecutionTime) {
-    this.calculatePriority(executionTimes);
-  }
-
-  private calculatePriority(executionTimes: ITaskExecutionTime) {
+  private calculateTasksPriority(): ITaskPriority {
+    let tasksPriority: any = {};
     let taskName: TaskName;
-    for (taskName in this.taskPriority) {
-      this.taskPriority[taskName] = this.calculateIdleTime(taskName, executionTimes);
+    for (taskName in TaskNameEnum) {
+      tasksPriority[taskName] = this.calculateIdleTime(taskName);
     }
-   }
+    return tasksPriority as ITaskPriority;
+  }
 
-  private calculateIdleTime(taskName: TaskName, executionTimes: ITaskExecutionTime): number {
-    return this.taskConfig[taskName].rateLimit*1000 - executionTimes[taskName];
+  private calculateIdleTime(taskName: TaskName): number {
+    const taskConfig = this.taskConfig[taskName];
+    return taskConfig.rateLimit - taskConfig.executionTime;
   }
 
   getTask(ongoingTasks: ITask[], blockedTasks: string[]): ITask | null {

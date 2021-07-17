@@ -1,11 +1,14 @@
 {
   "clean_the_windows": {
-    "rateLimit": 5.0
+    "rateLimit": 5.0,
+    "executionTime": 0.3
   },
   "water_the_plants": {
-    "rateLimit": 3.0
+    "rateLimit": 3.0,
+    "executionTime": 0.7
   },
   "feed_the_cat": {
-    "rateLimit": 2.0
+    "rateLimit": 2.0,
+    "executionTime": 0.5
   }
 }

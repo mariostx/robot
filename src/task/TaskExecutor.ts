@@ -1,6 +1,6 @@
 import { ITaskManager } from '../interfaces/Task';
 import { ITaskConfig as ITaskConfig } from '../interfaces/TaskConfig';
-import { ITask, ITaskExecutionTime } from '../interfaces/Task';
+import { ITask } from '../interfaces/Task';
 import { StopWatch } from '../util/time/StopWatch';
 
 export class TaskExecutor {
@@ -10,16 +10,10 @@ export class TaskExecutor {
   private taskManager: ITaskManager;
   private taskConfig: ITaskConfig;
   private blockedTasks: string[] = [];
-  private executionTime: ITaskExecutionTime = {
-    clean_the_windows: 300,
-    feed_the_cat: 500,
-    water_the_plants: 700
-  };
 
   constructor(taskManager: ITaskManager, taskConfig: ITaskConfig) {
     this.taskManager = taskManager;
     this.taskConfig = taskConfig;
-    this.taskManager.evaluate(this.executionTime);
   }
 
   executeTasks = (): void => {
@@ -56,25 +50,25 @@ export class TaskExecutor {
   };
 
   private cleanWindows = (task: ITask) => {
-    this.execute(task, this.executionTime.clean_the_windows, this.taskConfig.clean_the_windows.rateLimit);
+    this.execute(task, this.taskConfig.clean_the_windows.executionTime, this.taskConfig.clean_the_windows.rateLimit);
   };
 
   private feedCat = (task: ITask) => {
-    this.execute(task, this.executionTime.feed_the_cat, this.taskConfig.feed_the_cat.rateLimit);
+    this.execute(task, this.taskConfig.feed_the_cat.executionTime, this.taskConfig.feed_the_cat.rateLimit);
   };
 
   private waterPlants = (task: ITask) => {
-    this.execute(task, this.executionTime.water_the_plants, this.taskConfig.water_the_plants.rateLimit);
+    this.execute(task, this.taskConfig.water_the_plants.executionTime, this.taskConfig.water_the_plants.rateLimit);
   };
 
-  private execute = (task: ITask, executionTimeMilis: number, taskRate: number) => {
+  private execute = (task: ITask, executionTime: number, taskRate: number) => {
     this.blockTask(task.name, taskRate);
     const sound = this.getSound(task);
     console.info('%ss\t|%s\t|B| %s', this.stopWatch.elapsedSecondsFixed(3), task.robotName, sound);
     setTimeout(() => {
       console.info('%ss\t|%s\t|E| %s', this.stopWatch.elapsedSecondsFixed(3), task.robotName, sound);
       this.finishTask(task);
-    }, executionTimeMilis);
+    }, executionTime*1000);
   }
 
   private getSound(task: ITask): string {
