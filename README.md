@@ -1,13 +1,13 @@
-# Build and run using docker
+Robots application can be build and run by docker or npm. The instructions are given in the following chapters.
 
-## Build docker image
+<br/>
+
+# Build and run using docker
+## Build and run using docker image
 
 ```
 docker build -t robot-image .
 ```
-&nbsp;
-&nbsp;
-## Run application
 
 Application can be run from the Docker desktop or from the CLI executing:
 
@@ -15,23 +15,26 @@ Application can be run from the Docker desktop or from the CLI executing:
 docker run robot-image
 ```
 &nbsp;
+## Build and run using docker compose
+
+```
+docker compose build
+docker compose up
+```
 &nbsp;
-# Build and run from CLI
+&nbsp;
+# Build and run by npm
 ## Installation
 ```
 npm install
 ```
 &nbsp;
-&nbsp;
-
 ## Build
 ```
-npm run-script build
+npm run build
 ```
 &nbsp;
-&nbsp;
-
 ## Run
 ```
-node .\build\main\RobotsApp.js
+npm run start
 ```
