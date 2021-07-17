@@ -1,12 +1,12 @@
-import { tasks } from './../../data/Tasks';
-import { TaskName, TaskNameEnum, TaskPriority } from './../../interfaces/Task';
+import { TaskName, ITaskPriority, ITaskManager, ITaskExecutionTime } from './../../interfaces/Task';
 import { ITask } from '../../interfaces/Task';
 import { ITaskConfig } from '../../interfaces/TaskConfig';
 
-export class PriorityTaskManager {
+export class PriorityTaskManager implements ITaskManager {
+
   private tasks: Map<string, ITask[]> = new Map();
   private taskConfig: ITaskConfig;
-  private taskPriority: TaskPriority;
+  private taskPriority: ITaskPriority;
 
   constructor(robotTasks: ITask[], taskConfig: ITaskConfig) {
     this.taskConfig = taskConfig;
@@ -19,10 +19,25 @@ export class PriorityTaskManager {
       }
     });
     this.taskPriority = {
-      clean_the_windows: taskConfig.clean_the_windows.rateLimit,
-      water_the_plants: taskConfig.water_the_plants.rateLimit,
-      feed_the_cat: taskConfig.feed_the_cat.rateLimit,
+      clean_the_windows: taskConfig.clean_the_windows.rateLimit*1000,
+      water_the_plants: taskConfig.water_the_plants.rateLimit*1000,
+      feed_the_cat: taskConfig.feed_the_cat.rateLimit*1000,
     };
+  }
+
+  evaluate(executionTimes: ITaskExecutionTime) {
+    this.calculatePriority(executionTimes);
+  }
+
+  private calculatePriority(executionTimes: ITaskExecutionTime) {
+    let taskName: TaskName;
+    for (taskName in this.taskPriority) {
+      this.taskPriority[taskName] = this.calculateIdleTime(taskName, executionTimes);
+    }
+   }
+
+  private calculateIdleTime(taskName: TaskName, executionTimes: ITaskExecutionTime): number {
+    return this.taskConfig[taskName].rateLimit*1000 - executionTimes[taskName];
   }
 
   getTask(ongoingTasks: ITask[], blockedTasks: string[]): ITask | null {
@@ -41,8 +56,8 @@ export class PriorityTaskManager {
                 if (robotTaskPriority > taskPriority) {
                     task = robotTask;
                 } else if (robotTaskPriority === taskPriority) {
-                    if (robotTasks.length > (this.tasks.get(task.name)?.length ?? 0)) {
-                        task = robotTask;
+                    if (robotTasks.length > (this.tasks.get(task.robotName)?.length ?? 0)) {
+                      task = robotTask;
                     }
                 }
             }
@@ -59,23 +74,9 @@ export class PriorityTaskManager {
     return task;
   }
 
-  size() {
+  size(): number {
     let size = 0;
-    Object.values(this.tasks).forEach((robotTasks) => size += robotTasks.length);
+    this.tasks.forEach((robotTasks) => size += robotTasks.length);
     return size;
   }
-
-//   private getPriority(taskName: TaskName) {
-//     switch (taskName) {
-//       case 'clean_the_windows':
-//         return this.taskPriority.clean_the_windows;
-//         break;
-//       case 'water_the_plants':
-//         return this.taskPriority.water_the_plants;
-//         break;
-//       case 'feed_the_cat':
-//         return this.taskPriority.feed_the_cat;
-//         break;
-//     }
-//   }
 }

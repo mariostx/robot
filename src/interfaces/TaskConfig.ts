@@ -1,7 +1,7 @@
 import { TaskName } from './Task';
 
 export type ITaskConfig = {
-    [taskName in TaskName]: {
-        rateLimit: number;
-    };
+  [taskName in TaskName]: {
+    rateLimit: number;
+  };
 };
